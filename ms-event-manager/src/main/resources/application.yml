@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://host:27017/
+      uri: mongodb://localhost:27017/Desafio3
