@@ -4,6 +4,7 @@ import io.github.juandev.mseventmanager.model.Event;
 import io.github.juandev.mseventmanager.service.EventService;
 import io.github.juandev.mseventmanager.web.dto.EventDto;
 import io.github.juandev.mseventmanager.web.mapper.EventMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,14 +38,14 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        service.save(event);
+    public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
+        Event event = service.save(eventDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(event);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Event> updateEvent(@RequestBody Event event, @RequestParam String id) {
-        service.update(mapper.EventToDto(event),id);
+    public ResponseEntity<Event> updateEvent(@RequestBody EventDto eventDto, @RequestParam String id) {
+        Event event = service.update(mapper.DtoToEvent(eventDto),id);
         return ResponseEntity.ok().body(event);
     }
 
