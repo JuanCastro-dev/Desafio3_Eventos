@@ -12,15 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventMapper {
 
-    private final ViacepClient viacepClient;
-
-    //Eai juan ?
-    @Autowired
-    public EventMapper(ViacepClient viacepClient) {
-        this.viacepClient = viacepClient;
-    }
-
-
     public static EventDto EventToDto(Event event) {
         return new ModelMapper().map(event, EventDto.class);
     }
@@ -30,11 +21,6 @@ public class EventMapper {
         event.setEventName(eventDto.getEventName());
         event.setCep(eventDto.getCep());
         event.setDateTime(eventDto.getDateTime());
-        Address address = viacepClient.getAddressByCep(eventDto.getCep());
-        event.setLocalidade(address.getLocalidade());
-        event.setUf(address.getUf());
-        event.setBairro(address.getBairro());
-        event.setLogradouro(address.getLogradouro());
         return event;
     }
 }
