@@ -1,6 +1,7 @@
 package io.github.juandev.mseventmanager.service;
 
 import io.github.juandev.mseventmanager.client.ViacepClient;
+import io.github.juandev.mseventmanager.exception.NotFoundException;
 import io.github.juandev.mseventmanager.model.Address;
 import io.github.juandev.mseventmanager.model.Event;
 import io.github.juandev.mseventmanager.repository.EventRepository;
@@ -27,7 +28,9 @@ public class EventService {
     }
 
     public Event findById(String id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(
+                () -> new NotFoundException("Event with id: "+id+" not found")
+        );
     }
 
     public List<Event> findAll() {
@@ -35,9 +38,13 @@ public class EventService {
     }
 
     public Event save(EventDto eventDto) {
+
+        //Fazer uma excessão para cep inválido
         Event event = mapper.DtoToEvent(eventDto);
 
-        Address address = viacepClient.getAddressByCep(event.getCep());
+        String cep = event.getCep().replace("-","");
+
+        Address address = viacepClient.getAddressByCep(cep);
         event.setLogradouro(address.getLogradouro());
         event.setLocalidade(address.getLocalidade());
         event.setUf(address.getUf());
@@ -47,16 +54,25 @@ public class EventService {
     }
 
     public void deleteById(String id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Event with id: "+id+" not found");
+        }
         repository.deleteById(id);
     }
 
     public Event update(Event event, String id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Event with id: "+id+" not found");
+        }
+
         Event oldEvent = findById(id);
         oldEvent.setEventName(event.getEventName());
         oldEvent.setDateTime(event.getDateTime());
         oldEvent.setCep(event.getCep());
 
-        Address newAddress = viacepClient.getAddressByCep(event.getCep());
+        String cep = event.getCep().replace("-","");
+
+        Address newAddress = viacepClient.getAddressByCep(cep);
         oldEvent.setLogradouro(newAddress.getLogradouro());
         oldEvent.setLocalidade(newAddress.getLocalidade());
         oldEvent.setUf(newAddress.getUf());

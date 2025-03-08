@@ -25,31 +25,31 @@ public class EventController {
         this.mapper = mapper;
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/get-event/{id}")
     public ResponseEntity<Event> findById(@RequestParam String id) {
         Event event = service.findById(id);
         return ResponseEntity.ok().body(event);
     }
 
-    @GetMapping
+    @GetMapping("/get-all-events")
     public ResponseEntity<List<Event>> findAll() {
         List<Event> events = service.findAll();
         return ResponseEntity.ok().body(events);
     }
 
-    @PostMapping
+    @PostMapping(value = "/create-event")
     public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
         Event event = service.save(eventDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(event);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/update-event/{id}")
     public ResponseEntity<Event> updateEvent(@RequestBody EventDto eventDto, @RequestParam String id) {
         Event event = service.update(mapper.DtoToEvent(eventDto),id);
         return ResponseEntity.ok().body(event);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/delete-event/{id}")
     public ResponseEntity<Event> deleteEvent(@RequestParam String id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
