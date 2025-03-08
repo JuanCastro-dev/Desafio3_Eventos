@@ -2,12 +2,12 @@ package io.github.juandev.mseventmanager.controller;
 
 import io.github.juandev.mseventmanager.model.Event;
 import io.github.juandev.mseventmanager.service.EventService;
+import io.github.juandev.mseventmanager.web.dto.EventDto;
+import io.github.juandev.mseventmanager.web.mapper.EventMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,10 +16,12 @@ import java.util.List;
 public class EventController {
 
     private final EventService service;
+    private final EventMapper mapper;
 
     @Autowired
-    public EventController(EventService service) {
+    public EventController(EventService service, EventMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping(value = "/{id}")
@@ -32,5 +34,23 @@ public class EventController {
     public ResponseEntity<List<Event>> findAll() {
         List<Event> events = service.findAll();
         return ResponseEntity.ok().body(events);
+    }
+
+    @PostMapping
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        service.save(event);
+        return ResponseEntity.status(HttpStatus.CREATED).body(event);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Event> updateEvent(@RequestBody Event event, @RequestParam String id) {
+        service.update(mapper.EventToDto(event),id);
+        return ResponseEntity.ok().body(event);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Event> deleteEvent(@RequestParam String id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
