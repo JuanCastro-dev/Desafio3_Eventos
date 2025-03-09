@@ -24,8 +24,8 @@ public class Ticket implements Serializable {
     private String customerName;
     @Email
     private String customerMail;
-    //Adicionar a classe de evento puxando do outro microsserviço
-    private String eventName;
+    //Conferir dependencia quando conseguir se conectar ao banco
+    private Event event;
     private Long BrlTotalAmount;
     private Long UsdTotalAmount;
     private String status;
