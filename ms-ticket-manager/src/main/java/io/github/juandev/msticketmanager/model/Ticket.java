@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 
 @Document(collection = "tickets")
-@Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class Ticket implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -29,4 +28,68 @@ public class Ticket implements Serializable {
     private Long BrlTotalAmount;
     private Long UsdTotalAmount;
     private String status = "Pendente";
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public @CPF String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(@CPF String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public @Email String getCustomerMail() {
+        return customerMail;
+    }
+
+    public void setCustomerMail(@Email String customerMail) {
+        this.customerMail = customerMail;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Long getBrlTotalAmount() {
+        return BrlTotalAmount;
+    }
+
+    public void setBrlTotalAmount(Long brlTotalAmount) {
+        BrlTotalAmount = brlTotalAmount;
+    }
+
+    public Long getUsdTotalAmount() {
+        return UsdTotalAmount;
+    }
+
+    public void setUsdTotalAmount(Long usdTotalAmount) {
+        UsdTotalAmount = usdTotalAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
