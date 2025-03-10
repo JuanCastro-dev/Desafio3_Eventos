@@ -6,6 +6,7 @@ import io.github.juandev.msticketmanager.model.Ticket;
 import io.github.juandev.msticketmanager.repository.TicketRepository;
 import io.github.juandev.msticketmanager.web.dto.TicketDto;
 import io.github.juandev.msticketmanager.web.dto.mapper.TicketMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class TicketService {
     private final TicketMapper ticketMapper;
     private final EventClient eventClient;
 
+    @Autowired
     public TicketService(TicketRepository ticketRepository, TicketMapper ticketMapper, EventClient eventClient) {
         this.ticketRepository = ticketRepository;
         this.ticketMapper = ticketMapper;
@@ -25,11 +27,9 @@ public class TicketService {
     }
 
     public Ticket findById(String ticketId) {
-        return ticketRepository.findById(ticketId).orElseThrow();
-    }
-
-    public List<Ticket> findAll() {
-        return ticketRepository.findAll();
+        return ticketRepository.findById(ticketId).orElseThrow(
+                () -> new RuntimeException("Ticket not found")
+        );
     }
 
     //validar se o evento existe
