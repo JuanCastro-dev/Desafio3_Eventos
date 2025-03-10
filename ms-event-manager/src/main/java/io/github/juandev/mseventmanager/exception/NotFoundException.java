@@ -2,7 +2,6 @@ package io.github.juandev.mseventmanager.exception;
 
 import lombok.Getter;
 
-@Getter
 public class NotFoundException extends RuntimeException {
 
     private String resource;
@@ -14,6 +13,22 @@ public class NotFoundException extends RuntimeException {
 
     public NotFoundException(String resource, String code) {
         this.resource = resource;
+        this.code = code;
+    }
+
+    public String getResource() {
+        return resource;
+    }
+
+    public void setResource(String resource) {
+        this.resource = resource;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
         this.code = code;
     }
 }
