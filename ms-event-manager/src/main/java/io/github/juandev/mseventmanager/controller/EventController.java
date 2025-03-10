@@ -26,7 +26,7 @@ public class EventController {
     }
 
     @GetMapping(value = "/get-event/{id}")
-    public ResponseEntity<Event> findById(@RequestParam String id) {
+    public ResponseEntity<Event> findById(@PathVariable String id) {
         Event event = service.findById(id);
         return ResponseEntity.ok().body(event);
     }
@@ -44,13 +44,13 @@ public class EventController {
     }
 
     @PutMapping(value = "/update-event/{id}")
-    public ResponseEntity<Event> updateEvent(@RequestBody EventDto eventDto, @RequestParam String id) {
+    public ResponseEntity<Event> updateEvent(@RequestBody EventDto eventDto, @PathVariable(value = "id") String id) {
         Event event = service.update(mapper.DtoToEvent(eventDto),id);
         return ResponseEntity.ok().body(event);
     }
 
     @DeleteMapping(value = "/delete-event/{id}")
-    public ResponseEntity<Event> deleteEvent(@RequestParam String id) {
+    public ResponseEntity<Event> deleteEvent(@PathVariable String id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
