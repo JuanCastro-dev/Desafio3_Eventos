@@ -1,18 +1,18 @@
 package io.github.juandev.msticketmanager.web.dto;
-
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.data.annotation.Id;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor @NoArgsConstructor
 public class TicketDto {
 
     @CPF
     private String cpf;
+    @Pattern(regexp = "^[a-zA-Z]+$") @NotNull
     private String customerName;
     @Email
     private String customerMail;

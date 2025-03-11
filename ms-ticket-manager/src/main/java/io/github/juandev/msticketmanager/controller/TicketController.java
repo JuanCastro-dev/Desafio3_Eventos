@@ -6,8 +6,10 @@ import io.github.juandev.msticketmanager.service.TicketService;
 import io.github.juandev.msticketmanager.web.dto.TicketDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +29,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/create-ticket")
-    public ResponseEntity<Ticket> createTicket(@RequestBody TicketDto ticketDto) {
+    public ResponseEntity<Ticket> createTicket(@RequestBody @Validated TicketDto ticketDto) {
         Ticket ticket = service.save(ticketDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(ticket);
     }
