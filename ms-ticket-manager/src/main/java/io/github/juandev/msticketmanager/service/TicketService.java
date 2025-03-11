@@ -59,4 +59,9 @@ public class TicketService {
 
         return ticketRepository.save(ticket);
     }
+
+    public List<Ticket> findByEvent(String eventId) {
+        Event event = eventClient.findById(eventId);
+        return ticketRepository.findByEvent(event);
+    }
 }

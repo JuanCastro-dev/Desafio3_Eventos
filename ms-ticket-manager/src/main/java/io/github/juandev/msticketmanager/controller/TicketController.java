@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/tickets")
 public class TicketController {
@@ -40,6 +42,12 @@ public class TicketController {
     public ResponseEntity cancelTicket(@PathVariable String id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/check-tickets-by-event/{eventId}")
+    public ResponseEntity<List<Ticket>> checkTicketsByEvent(@PathVariable String eventId) {
+        List<Ticket> tickets = service.findByEvent(eventId);
+        return ResponseEntity.ok().body(tickets);
     }
 
 }
