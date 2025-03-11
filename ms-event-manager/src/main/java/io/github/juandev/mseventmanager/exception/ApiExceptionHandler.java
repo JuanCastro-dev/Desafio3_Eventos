@@ -26,7 +26,6 @@ public class ApiExceptionHandler {
         String msg = ex.getMsg() != null ?
                 ex.getMsg() :
                 "Recurso não encontrado.";
-
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -34,9 +33,8 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(HasTicketsSoldOutException.class)
-    public ResponseEntity<ErrorMessage> HasTicketsSoldOutException(BadRequestException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> HasTicketsSoldOutException(HasTicketsSoldOutException ex, HttpServletRequest request) {
         String msg = ex.getMessage();
-
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .contentType(MediaType.APPLICATION_JSON)

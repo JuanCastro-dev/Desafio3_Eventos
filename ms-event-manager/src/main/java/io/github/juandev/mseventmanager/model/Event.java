@@ -26,6 +26,14 @@ public class Event implements Serializable {
     private String localidade;
     private String uf;
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public String getId() {
         return id;
     }
@@ -40,14 +48,6 @@ public class Event implements Serializable {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public @Size(min = 9, max = 9, message = "Must follow the format: 00000-000") String getCep() {

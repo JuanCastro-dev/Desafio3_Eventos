@@ -10,20 +10,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
-@Document(collection = "tickets")
 @NoArgsConstructor @AllArgsConstructor
 public class Ticket implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
     private String ticketId;
-    @CPF
     private String cpf;
     private String customerName;
-    @Email
     private String customerMail;
-    @DBRef(lazy = true)
-    private Event event;
     private Long BrlTotalAmount;
     private Long UsdTotalAmount;
     private String status = "Pendente";
@@ -36,11 +30,11 @@ public class Ticket implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public @CPF String getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(@CPF String cpf) {
+    public void setCpf( String cpf) {
         this.cpf = cpf;
     }
 
@@ -52,20 +46,12 @@ public class Ticket implements Serializable {
         this.customerName = customerName;
     }
 
-    public @Email String getCustomerMail() {
+    public String getCustomerMail() {
         return customerMail;
     }
 
-    public void setCustomerMail(@Email String customerMail) {
+    public void setCustomerMail( String customerMail) {
         this.customerMail = customerMail;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
     }
 
     public Long getBrlTotalAmount() {
