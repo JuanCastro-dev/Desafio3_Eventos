@@ -2,6 +2,8 @@ package io.github.juandev.mseventmanager;
 
 import io.github.juandev.mseventmanager.model.Event;
 import io.github.juandev.mseventmanager.repository.EventRepository;
+import io.github.juandev.mseventmanager.web.dto.EventDto;
+import io.github.juandev.mseventmanager.web.mapper.EventMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,8 @@ public class EventIT {
     private WebTestClient testClient;
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private EventMapper eventMapper;
 
     @BeforeEach
     public void setUp() {
@@ -40,8 +44,10 @@ public class EventIT {
         eventRepository.deleteAll();
     }
 
+    // --> GET
+
     @Test
-    public void findEvent_Valid_ReturnStatus200() {
+    public void findEvent_WithValidId_ReturnStatus200() {
         Event responseBody = testClient
                 .get()
                 .uri("/events/get-event/67c9dee125301d1cb8215eee")
@@ -64,11 +70,11 @@ public class EventIT {
                 .expectStatus().isNotFound();
     }
 
+    // --> POST
+
     @Test
-    public void createEvent_WithValidData_ReturnsPostWithStatus201(){
-        Event eventTest = new Event("67c9dee125301d1cb8215fff",
-                "Circuito de drift", LocalDateTime.now(),
-                "70393-900","Bloco H SDS","Asa Sul","Brasilia","DF");
+    public void createEvent_WithValidData_ReturnStatus201(){
+        EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
         Event responseBody = testClient
                 .post()
@@ -88,10 +94,8 @@ public class EventIT {
     }
 
     @Test
-    public void createEvent_WithInvalidCPF_ReturnsPostWithStatus400(){
-        Event eventTest = new Event("67c9dee125301d1cb8215fff",
-                "Circuito de drift", LocalDateTime.now(),
-                "70393-9","Bloco H SDS","Asa Sul","Brasilia","DF");
+    public void createEvent_WithInvalidCEP_ReturnStatus400(){
+        EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-9");
 
         testClient
                 .post()
@@ -101,4 +105,66 @@ public class EventIT {
                 .exchange()
                 .expectStatus().isBadRequest();
     }
+
+    // --> DELETE
+
+    @Test
+    public void deleteEvent_WithValidId_ReturnsPostWithStatus204(){
+        testClient
+                .delete()
+                .uri("/events/delete-event/67c9dee125301d1cb8215eee")
+                .exchange()
+                .expectStatus().isNoContent();
+    }
+
+    @Test
+    public void deleteEvent_WithInvalidId_ReturnsPostWithStatus204(){
+        testClient
+                .delete()
+                .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
+                .exchange()
+                .expectStatus().isNotFound();
+    }
+
+    // --> PUT
+
+    @Test
+    public void updateEvent_WithValidData_ReturnsStatus200() {
+        EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
+
+        testClient
+                .put()
+                .uri("/events/delete-event/67c9dee125301d1cb8215eee")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(eventTest)
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+    @Test
+    public void updateEvent_WithInvalidId_ReturnsStatus404() {
+        EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
+
+        testClient
+                .put()
+                .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(eventTest)
+                .exchange()
+                .expectStatus().isNotFound();
+    }
+
+    @Test
+    public void updateEvent_WithInvalidCEP_ReturnsStatus400() {
+        EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-9");
+
+        testClient
+                .put()
+                .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(eventTest)
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
 }
