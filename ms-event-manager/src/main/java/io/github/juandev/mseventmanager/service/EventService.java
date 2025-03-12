@@ -60,7 +60,6 @@ public class EventService {
         }catch (FeignException.FeignClientException e){
             throw new BadRequestException("CEP inválido");
         }
-        //Configurar uma exception para a data
     }
 
     public void deleteById(String id) {
