@@ -9,13 +9,20 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@NoArgsConstructor @AllArgsConstructor
 public class EventDto {
 
     private String eventName;
     private LocalDateTime dateTime;
     @Size(min = 9, max = 9, message = "Must follow the format: 00000-000")
     private String cep;
+
+    public EventDto(){}
+
+    public EventDto(String eventName, LocalDateTime dateTime, String cep) {
+        this.eventName = eventName;
+        this.dateTime = dateTime;
+        this.cep = cep;
+    }
 
     public String getEventName() {
         return eventName;
