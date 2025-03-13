@@ -3,18 +3,32 @@ package io.github.juandev.msticketmanager.model;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Event implements Serializable {
 
     private String id;
     private String eventName;
-    private Date dateTime;
+    private LocalDateTime dateTime;
     private String cep;
     private String logradouro;
     private String bairro;
     private String localidade;
     private String uf;
+
+    public Event() {}
+
+    public Event(String id, String eventName, LocalDateTime dateTime, String cep, String logradouro, String bairro, String localidade, String uf) {
+        this.id = id;
+        this.eventName = eventName;
+        this.dateTime = dateTime;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.uf = uf;
+    }
 
     public String getId() {
         return id;
@@ -32,11 +46,11 @@ public class Event implements Serializable {
         this.eventName = eventName;
     }
 
-    public Date getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
