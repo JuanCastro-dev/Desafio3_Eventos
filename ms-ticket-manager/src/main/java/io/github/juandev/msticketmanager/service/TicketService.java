@@ -48,7 +48,6 @@ public class TicketService {
         catch (FeignException.FeignClientException e){
             throw new NotFoundException("Event not found");
         }
-        //Depois ver a excessão dos bad requests que não está indo
     }
 
     public void deleteById(String ticketId) {

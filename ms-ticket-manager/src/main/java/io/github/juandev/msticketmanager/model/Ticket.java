@@ -15,7 +15,6 @@ import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Document(collection = "tickets")
-@NoArgsConstructor @AllArgsConstructor
 public class Ticket implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,9 +27,22 @@ public class Ticket implements Serializable {
     private String customerMail;
     @DBRef(lazy = true)
     private Event event;
-    private Long BrlTotalAmount;
-    private Long UsdTotalAmount;
+    private double BrlTotalAmount;
+    private double UsdTotalAmount;
     private String status = "Pendente";
+
+    public Ticket() {}
+
+    public Ticket(String ticketId, String cpf, String customerName, String customerMail, Event event, double brlTotalAmount, double usdTotalAmount, String status) {
+        this.ticketId = ticketId;
+        this.cpf = cpf;
+        this.customerName = customerName;
+        this.customerMail = customerMail;
+        this.event = event;
+        BrlTotalAmount = brlTotalAmount;
+        UsdTotalAmount = usdTotalAmount;
+        this.status = status;
+    }
 
     public String getTicketId() {
         return ticketId;
@@ -72,7 +84,7 @@ public class Ticket implements Serializable {
         this.event = event;
     }
 
-    public Long getBrlTotalAmount() {
+    public double getBrlTotalAmount() {
         return BrlTotalAmount;
     }
 
@@ -80,7 +92,7 @@ public class Ticket implements Serializable {
         BrlTotalAmount = brlTotalAmount;
     }
 
-    public Long getUsdTotalAmount() {
+    public double getUsdTotalAmount() {
         return UsdTotalAmount;
     }
 
