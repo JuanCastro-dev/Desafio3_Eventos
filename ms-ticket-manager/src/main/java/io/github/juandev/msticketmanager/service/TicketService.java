@@ -36,7 +36,6 @@ public class TicketService {
         );
     }
 
-    //validar se o evento existe
     public Ticket save(TicketDto ticketDto) {
         Ticket ticket = ticketMapper.DtoToTicket(ticketDto);
 
@@ -73,8 +72,6 @@ public class TicketService {
         ticket.setEvent(event);
 
         return ticketRepository.save(ticket);
-
-        //Depois ver a excessão dos bad requests que não está indo
     }
 
     public List<Ticket> findByEvent(String eventId) {

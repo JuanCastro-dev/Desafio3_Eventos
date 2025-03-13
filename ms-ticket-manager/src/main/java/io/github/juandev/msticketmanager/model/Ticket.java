@@ -88,7 +88,7 @@ public class Ticket implements Serializable {
         return BrlTotalAmount;
     }
 
-    public void setBrlTotalAmount(Long brlTotalAmount) {
+    public void setBrlTotalAmount(double brlTotalAmount) {
         BrlTotalAmount = brlTotalAmount;
     }
 
@@ -96,7 +96,7 @@ public class Ticket implements Serializable {
         return UsdTotalAmount;
     }
 
-    public void setUsdTotalAmount(Long usdTotalAmount) {
+    public void setUsdTotalAmount(double usdTotalAmount) {
         UsdTotalAmount = usdTotalAmount;
     }
 

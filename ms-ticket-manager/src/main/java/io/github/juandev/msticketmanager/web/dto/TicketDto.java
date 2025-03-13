@@ -7,7 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@AllArgsConstructor @NoArgsConstructor
 public class TicketDto {
 
     @CPF
@@ -18,8 +17,20 @@ public class TicketDto {
     private String customerMail;
     private String eventId;
     private String eventName;
-    private Long BrlTotalAmount;
-    private Long UsdTotalAmount;
+    private double BrlTotalAmount;
+    private double UsdTotalAmount;
+
+    public TicketDto() {}
+
+    public TicketDto(String cpf, String customerName, String customerMail, String eventId, String eventName, double brlTotalAmount, double usdTotalAmount) {
+        this.cpf = cpf;
+        this.customerName = customerName;
+        this.customerMail = customerMail;
+        this.eventId = eventId;
+        this.eventName = eventName;
+        BrlTotalAmount = brlTotalAmount;
+        UsdTotalAmount = usdTotalAmount;
+    }
 
     public @CPF String getCpf() {
         return cpf;
@@ -61,19 +72,19 @@ public class TicketDto {
         this.eventName = eventName;
     }
 
-    public Long getBrlTotalAmount() {
+    public double getBrlTotalAmount() {
         return BrlTotalAmount;
     }
 
-    public void setBrlTotalAmount(Long brlTotalAmount) {
+    public void setBrlTotalAmount(double brlTotalAmount) {
         BrlTotalAmount = brlTotalAmount;
     }
 
-    public Long getUsdTotalAmount() {
+    public double getUsdTotalAmount() {
         return UsdTotalAmount;
     }
 
-    public void setUsdTotalAmount(Long usdTotalAmount) {
+    public void setUsdTotalAmount(double usdTotalAmount) {
         UsdTotalAmount = usdTotalAmount;
     }
 }
