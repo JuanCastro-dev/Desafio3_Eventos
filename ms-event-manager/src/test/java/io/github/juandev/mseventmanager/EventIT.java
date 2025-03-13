@@ -109,7 +109,7 @@ public class EventIT {
     // --> DELETE
 
     @Test
-    public void deleteEvent_WithValidId_ReturnsPostWithStatus204(){
+    public void deleteEvent_WithValidId_ReturnStatus204(){
         testClient
                 .delete()
                 .uri("/events/delete-event/67c9dee125301d1cb8215eee")
@@ -118,7 +118,7 @@ public class EventIT {
     }
 
     @Test
-    public void deleteEvent_WithInvalidId_ReturnsPostWithStatus204(){
+    public void deleteEvent_WithInvalidId_ReturnStatus404(){
         testClient
                 .delete()
                 .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
@@ -129,25 +129,33 @@ public class EventIT {
     // --> PUT
 
     @Test
-    public void updateEvent_WithValidData_ReturnsStatus200() {
+    public void updateEvent_WithValidData_ReturnStatus200() {
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
-        testClient
+        Event responseBody = testClient
                 .put()
-                .uri("/events/delete-event/67c9dee125301d1cb8215eee")
+                .uri("/events/update-event/67c9dee125301d1cb8215eee")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(eventTest)
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus().isOk()
+                .expectBody(Event.class)
+                .returnResult().getResponseBody();
+
+        assert responseBody != null;
+        assert responseBody.getId() != null;
+        assert responseBody.getEventName().equals(eventTest.getEventName());
+        assert responseBody.getCep().equals(eventTest.getCep());
+        assert responseBody.getDateTime().equals(eventTest.getDateTime());
     }
 
     @Test
-    public void updateEvent_WithInvalidId_ReturnsStatus404() {
+    public void updateEvent_WithInvalidId_ReturnStatus404() {
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
         testClient
                 .put()
-                .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
+                .uri("/events/update-event/67c9dee125301d1cb8215xyz")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(eventTest)
                 .exchange()
@@ -155,12 +163,12 @@ public class EventIT {
     }
 
     @Test
-    public void updateEvent_WithInvalidCEP_ReturnsStatus400() {
+    public void updateEvent_WithInvalidCEP_ReturnStatus400() {
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-9");
 
         testClient
                 .put()
-                .uri("/events/delete-event/67c9dee125301d1cb8215xyz")
+                .uri("/events/update-event/67c9dee125301d1cb8215xyz")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(eventTest)
                 .exchange()
