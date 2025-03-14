@@ -27,17 +27,17 @@
 
 ----------- Requisições ----------
 
-Criar Evento: /events/create-event
-Deletar Evento: /events/delete-event/{id}
-Buscar Evento pelo id: /events/get-event/{id}
-Buscar todos os Eventos: /events/get-all-events
-Atualizar Evento: /events/update-event/{id}
+- Criar Evento: /events/create-event
+- Deletar Evento: /events/delete-event/{id}
+- Buscar Evento pelo id: /events/get-event/{id}
+- Buscar todos os Eventos: /events/get-all-events
+- Atualizar Evento: /events/update-event/{id}
 
-Criar Ticket: /tickets/create-ticket
-Deletar Ticket: /tickets/cancel-ticket/{id}
-Buscar Ticket pelo id: /tickets/get-ticket/{id}
-Buscar Tickets pelo id do Evento: /tickets/check-tickets-by-event/{eventId}
-Atualizar Ticket: /tickets/update-ticket/{id}
+- Criar Ticket: /tickets/create-ticket
+- Deletar Ticket: /tickets/cancel-ticket/{id}
+- Buscar Ticket pelo id: /tickets/get-ticket/{id}
+- Buscar Tickets pelo id do Evento: /tickets/check-tickets-by-event/{eventId}
+- Atualizar Ticket: /tickets/update-ticket/{id}
 
 - Parametros para o corpo da requisição para atualizar ou criar um evento:
   {
