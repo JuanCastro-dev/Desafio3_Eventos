@@ -58,7 +58,7 @@ public class EventService {
 
             return repository.save(event);
         }catch (FeignException.FeignClientException e){
-            throw new BadRequestException("CEP inválido");
+            throw new BadRequestException("Invalid CEP");
         }
     }
 
@@ -67,7 +67,7 @@ public class EventService {
             throw new NotFoundException("Event with id: "+id+" not found");
         }
         if (!ticketClient.checkTicketsByEvent(id).isEmpty()){
-            throw new HasTicketsSoldOutException("Há tickets vendidos, não é possível excluir o evento");
+            throw new HasTicketsSoldOutException("Tickets are sold, event cannot be deleted");
         }
         repository.deleteById(id);
     }
@@ -92,7 +92,7 @@ public class EventService {
 
             return repository.save(oldEvent);
         }catch (FeignException.FeignClientException e){
-            throw new BadRequestException("CEP inválido");
+            throw new BadRequestException("Invalid CEP");
         }
     }
 }
