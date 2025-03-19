@@ -8,10 +8,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Document(collection = "tickets")
@@ -23,7 +19,6 @@ public class Ticket implements Serializable {
     @CPF
     private String cpf;
     private String customerName;
-    @Email
     private String customerMail;
     @DBRef(lazy = true)
     private Event event;
@@ -68,11 +63,11 @@ public class Ticket implements Serializable {
         this.customerName = customerName;
     }
 
-    public @Email String getCustomerMail() {
+    public  String getCustomerMail() {
         return customerMail;
     }
 
-    public void setCustomerMail(@Email String customerMail) {
+    public void setCustomerMail(String customerMail) {
         this.customerMail = customerMail;
     }
 

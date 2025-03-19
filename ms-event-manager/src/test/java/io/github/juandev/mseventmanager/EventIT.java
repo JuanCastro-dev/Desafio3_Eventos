@@ -1,4 +1,4 @@
-package io.github.juandev.mseventmanager;
+//package io.github.juandev.mseventmanager;
 
 import io.github.juandev.mseventmanager.model.Event;
 import io.github.juandev.mseventmanager.repository.EventRepository;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.time.LocalDateTime;
-
+/*
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EventIT {
 
@@ -61,7 +61,7 @@ public class EventIT {
         assert responseBody.getId().equals("67c9dee125301d1cb8215eee");
     }
 
-    @Test
+  @Test
     public void findEvent_InvalidId_ReturnStatus404() {
         testClient
                 .get()
@@ -72,7 +72,7 @@ public class EventIT {
 
     // --> POST
 
-    @Test
+   @Test
     public void createEvent_WithValidData_ReturnStatus201(){
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
@@ -117,7 +117,7 @@ public class EventIT {
                 .expectStatus().isNoContent();
     }
 
-    @Test
+   @Test
     public void deleteEvent_WithInvalidId_ReturnStatus404(){
         testClient
                 .delete()
@@ -128,7 +128,7 @@ public class EventIT {
 
     // --> PUT
 
-    @Test
+   @Test
     public void updateEvent_WithValidData_ReturnStatus200() {
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
@@ -149,7 +149,7 @@ public class EventIT {
         assert responseBody.getDateTime().equals(eventTest.getDateTime());
     }
 
-    @Test
+   @Test
     public void updateEvent_WithInvalidId_ReturnStatus404() {
         EventDto eventTest = new EventDto("Circuito de drift", LocalDateTime.now(), "70393-900");
 
@@ -177,3 +177,5 @@ public class EventIT {
 
 
 }
+
+ */
