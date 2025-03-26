@@ -1,9 +1,13 @@
 ----------- Para uso em cloud ----------
 
-- Faça as requisições pelo endereço http://18.218.207.201:8080 (TicketManager)
-- Faça as requisições pelo endereço http://18.218.207.201:8081 (EventManager)
+*Confira a disponibilidade das instâncias, seus endereços também podem ser alterados pela AWS!*
 
-- É nescessário subir uma instância do Banco de Dados MongoDB com o nome do banco: Desafio3
+- Faça as requisições pelo endereço http://3.147.209.33:8080/tickets (TicketManager)
+- Faça as requisições pelo endereço http://18.219.131.44:8081/events (EventManager)
+
+- Endereço do mongodb: mongodb://18.224.100.197:27017/
+
+- É nescessário subir uma instância do Banco de Dados MongoDB com o nome do banco : Desafio3 (Tutorial pelo linux)
       1. Crie uma instância EC2 (Garantindo que no security group esteja liberado o tráfego na porta 27017, que é a padrão do mongo)
       2. Conecte-se a ela via SSH
       3. Instale o MongoDB na instância com o comando : sudo apt-get install -y mongodb
