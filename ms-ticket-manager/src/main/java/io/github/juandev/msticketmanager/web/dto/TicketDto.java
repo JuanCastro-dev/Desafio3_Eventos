@@ -3,17 +3,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class TicketDto {
 
     @CPF
     private String cpf;
-    @Pattern(regexp = "^[a-zA-Z]+$") @NotNull
+
     private String customerName;
-    @Email
     private String customerMail;
     private String eventId;
     private String eventName;
@@ -48,11 +44,11 @@ public class TicketDto {
         this.customerName = customerName;
     }
 
-    public @Email String getCustomerMail() {
+    public String getCustomerMail() {
         return customerMail;
     }
 
-    public void setCustomerMail(@Email String customerMail) {
+    public void setCustomerMail( String customerMail) {
         this.customerMail = customerMail;
     }
 
